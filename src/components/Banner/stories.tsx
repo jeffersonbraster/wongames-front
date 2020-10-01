@@ -11,6 +11,9 @@ export default {
     subtitle: '<p>subtitle banner</p>',
     buttonLabel: 'Buy Now',
     buttonLink: '/games/defy-death'
+  },
+  parameters: {
+    layout: 'fullscreen'
   }
 } as Meta
 
