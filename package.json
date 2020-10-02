@@ -13,17 +13,6 @@
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook -s ./public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*": [
-      "yarn lint --fix",
-      "yarn test --findRelatedTests --bail"
-    ]
-  },
   "dependencies": {
     "@styled-icons/material-outlined": "^10.18.0",
     "@styled-icons/remix-fill": "^10.18.0",
