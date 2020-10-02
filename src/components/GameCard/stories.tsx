@@ -7,8 +7,15 @@ export default {
   args: {
     title: 'Population zero',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x140',
-    price: 'R$ 235,00'
+    img:
+      'https://avatars0.githubusercontent.com/u/36991175?s=460&u=00ea01fdb917ef7b17d6b1091d0d0670c4574049&v=4',
+    price: 'R$ 235,00',
+    promotionalPrice: 'R$ 200,00'
+  },
+  parameters: {
+    backgrounds: {
+      default: 'dark'
+    }
   }
 } as Meta
 
