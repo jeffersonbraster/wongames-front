@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --max-warnings=0",
