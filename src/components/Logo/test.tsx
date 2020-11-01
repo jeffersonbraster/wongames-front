@@ -4,6 +4,12 @@ import 'jest-styled-components'
 import Logo from '.'
 
 describe('<Logo />', () => {
+  it('should render the logo with id passed', () => {
+    const { container } = renderWithTheme(<Logo id="myid" />)
+
+    expect(container.querySelector('#paint_linear_myid')).toBeInTheDocument()
+  })
+
   it('should render a white label by default', () => {
     //renderizar o componente 'render'
     //selecionar o elemento a ser testado 'screen'(queries) - getbylable...
