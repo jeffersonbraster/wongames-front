@@ -282,7 +282,7 @@ exports[`<FormSignUp /> should render the heading 1`] = `
         >
           Already have an account?
           <a
-            href="/sign-up"
+            href="/sign-in"
           >
             Sing in
           </a>
