@@ -1,5 +1,7 @@
 import Game, { GameTemplateProps } from 'templates/Game'
 import galleryMock from 'components/Gallery/mock'
+import gamesMock from 'components/GameCardSlider/mock'
+import highlighMock from 'components/Highlight/mock'
 
 export default function Index(props: GameTemplateProps) {
   return <Game {...props} />
@@ -50,7 +52,10 @@ export async function getStaticProps() {
         publisher: 'Walkabout',
         rating: 'BR0',
         genres: ['Role-playing']
-      }
+      },
+      upcomingGames: gamesMock,
+      upcomingHighlight: highlighMock,
+      recommendedGames: gamesMock
     }
   }
 }
