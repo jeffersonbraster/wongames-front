@@ -42,7 +42,15 @@ export async function getStaticProps() {
           'Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality'
       },
       gallery: galleryMock,
-      description: descriptionHTML
+      description: descriptionHTML,
+      details: {
+        developer: 'Different Tales',
+        releaseDate: '2020-11-21T23:00:00',
+        platforms: ['windows', 'mac', 'linux'],
+        publisher: 'Walkabout',
+        rating: 'BR0',
+        genres: ['Role-playing']
+      }
     }
   }
 }
