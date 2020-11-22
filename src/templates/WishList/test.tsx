@@ -6,6 +6,7 @@ import highlightMock from 'components/Highlight/mock'
 import Wishlist from '.'
 
 const props = {
+  games: gamesMock,
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock
 }
@@ -24,6 +25,9 @@ describe('<WishList />', () => {
     expect(
       screen.getByRole('heading', { name: /wishlist/i })
     ).toBeInTheDocument()
+
+    expect(screen.getAllByText(/populate zero/i)).toHaveLength(6)
+
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
   })
 })
