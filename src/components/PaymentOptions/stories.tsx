@@ -10,7 +10,10 @@ export default {
   },
   argTypes: {
     cards: {
-      actions: 'clicked'
+      type: ''
+    },
+    handlePayment: {
+      action: 'cliked'
     }
   },
   parameters: {
