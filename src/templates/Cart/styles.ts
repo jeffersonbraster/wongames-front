@@ -13,3 +13,17 @@ export const Content = styled.div`
     `}
   `}
 `
+
+export const Obs = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.gray};
+
+    span {
+      color: ${theme.colors.primary};
+    }
+
+    svg {
+      color: ${theme.colors.primary};
+    }
+  `}
+`

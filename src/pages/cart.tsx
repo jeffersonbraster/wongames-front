@@ -11,7 +11,7 @@ export default function CartPage(props: CartProps) {
 export async function getServerSideProps() {
   return {
     props: {
-      items: [],
+      items: itemsMock,
       total: 'R$ 430',
       cards: cardsMock,
       recommendedGames: gamesMock,
