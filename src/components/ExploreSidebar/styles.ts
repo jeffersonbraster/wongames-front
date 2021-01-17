@@ -101,7 +101,7 @@ const wrapperModifiers = {
       font-weight: ${theme.font.normal};
     }
 
-    ${RadioStyles.Label}, ${CheckBoxStyles} {
+    ${RadioStyles.Label}, ${CheckBoxStyles.Label} {
       color: ${theme.colors.black};
     }
 
