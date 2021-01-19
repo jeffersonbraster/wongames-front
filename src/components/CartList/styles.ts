@@ -1,4 +1,4 @@
-import { tint, darken } from 'polished'
+import { tint } from 'polished'
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 

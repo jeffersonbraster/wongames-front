@@ -18,6 +18,6 @@ describe('<CartList />', () => {
   it('should render the button', () => {
     renderWithTheme(<CartList items={mockItems} total="R$ 330,00" hasButton />)
 
-    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+    expect(screen.getByText(/buy it now/i)).toBeInTheDocument()
   })
 })
