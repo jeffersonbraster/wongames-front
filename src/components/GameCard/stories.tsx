@@ -10,7 +10,8 @@ export default {
     img:
       'https://avatars0.githubusercontent.com/u/36991175?s=460&u=00ea01fdb917ef7b17d6b1091d0d0670c4574049&v=4',
     price: 'R$ 235,00',
-    promotionalPrice: 'R$ 200,00'
+    promotionalPrice: 'R$ 200,00',
+    slug: 'population-zero'
   },
   argTypes: {
     onFav: { action: 'clicked' },
