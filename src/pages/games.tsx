@@ -14,7 +14,7 @@ export async function getStaticProps() {
   const { data } = await apolloClient.query<QueryGames, QueryGamesVariables>({
     query: QUERY_GAMES,
     variables: {
-      limit: 9
+      limit: 100
     }
   })
 
@@ -25,11 +25,8 @@ export async function getStaticProps() {
         title: game.name,
         slug: game.slug,
         developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover!.url}`,
-        price: new Intl.NumberFormat('en', {
-          style: 'currency',
-          currency: 'USD'
-        }).format(game.price)
+        img: `http://localhost:1337${game.cover?.url}`,
+        price: game.price
       })),
       filterItems: filterItemsMock
     }
