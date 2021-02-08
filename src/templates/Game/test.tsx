@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+
 import galleryMock from 'components/Gallery/mock'
 import gameInfoMock from 'components/GameInfo/mock'
 import gameDetailsMock from 'components/GameDetails/mock'
@@ -17,6 +18,7 @@ const props: GameTemplateProps = {
   details: gameDetailsMock as GameDetailsProps,
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
+  recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock
 }
 
@@ -58,7 +60,6 @@ jest.mock('components/Showcase', () => ({
 describe('<Game />', () => {
   it('should render the template with components', () => {
     renderWithTheme(<Game {...props} />)
-
     expect(screen.getByTestId('Mock Gallery')).toBeInTheDocument()
     expect(screen.getByTestId('Mock GameDetails')).toBeInTheDocument()
     expect(screen.getByTestId('Mock GameInfo')).toBeInTheDocument()
@@ -79,12 +80,16 @@ describe('<Game />', () => {
       display: 'none'
     })
 
-    expect(
-      screen.getByTestId('Mock Gallery').parentElement
-    ).toHaveStyleRule('display', 'block', { media: '(min-width: 768px)' })
+    expect(screen.getByTestId('Mock Gallery').parentElement).toHaveStyleRule(
+      'display',
+      'block',
+      {
+        media: '(min-width: 768px)'
+      }
+    )
   })
 
-  it('shoud render the cover image', () => {
+  it('should render the cover image', () => {
     renderWithTheme(<Game {...props} />)
 
     const cover = screen.getByRole('image', { name: /cover/i })

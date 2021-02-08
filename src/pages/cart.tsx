@@ -11,9 +11,9 @@ export default function CartPage(props: CartProps) {
 }
 
 export async function getServerSideProps() {
-  const apolloCliente = initializeApollo()
+  const apolloClient = initializeApollo()
 
-  const { data } = await apolloCliente.query<QueryRecommended>({
+  const { data } = await apolloClient.query<QueryRecommended>({
     query: QUERY_RECOMMENDED
   })
 

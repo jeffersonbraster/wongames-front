@@ -14,7 +14,8 @@ const props = {
   total: '$ 430,00',
   cards: cardsMock,
   recommendedHighlight: highlightMock,
-  recommendedGames: gamesMock
+  recommendedGames: gamesMock,
+  recommendedTitle: 'teste'
 }
 
 jest.mock('templates/Base', () => ({
