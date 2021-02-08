@@ -12,12 +12,14 @@ import { ErrorWarning } from '@styled-icons/remix-line/ErrorWarning'
 import * as S from './styles'
 
 export type CartProps = {
+  recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 } & CartListProps &
   Pick<PaymentOptionsProps, 'cards'>
 
 const Cart = ({
+  recommendedTitle,
   recommendedGames,
   recommendedHighlight,
   items,
@@ -58,7 +60,7 @@ const Cart = ({
         <Divider />
       </Container>
       <ShowCase
-        title="You may like this games"
+        title={recommendedTitle || 'You may like this games'}
         games={recommendedGames}
         highlight={recommendedHighlight}
       />
