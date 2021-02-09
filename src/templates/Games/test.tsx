@@ -1,9 +1,10 @@
 import { screen } from '@testing-library/react'
+import { MockedProvider } from '@apollo/client/testing'
 import { renderWithTheme } from 'utils/tests/helpers'
-import gamesMock from 'components/GameCardSlider/mock'
 import filterItemsMock from 'components/ExploreSidebar/mock'
 
 import Games from '.'
+import { QUERY_GAMES } from 'graphql/queries/games'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -19,21 +20,47 @@ jest.mock('components/ExploreSidebar', () => ({
   }
 }))
 
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock GameCard" />
-  }
-}))
-
 describe('<Games />', () => {
-  it('should render sections', () => {
+  it('should render sections', async () => {
     renderWithTheme(
-      <Games filterItems={filterItemsMock} games={[gamesMock[0]]} />
+      <MockedProvider
+        mocks={[
+          {
+            request: {
+              query: QUERY_GAMES,
+              variables: { limit: 9 }
+            },
+            result: {
+              data: {
+                games: [
+                  {
+                    name: 'Soldier of Fortune II: Double Helix - Gold Edition',
+                    slug: 'soldier-of-fortune-ii-double-helix-gold-edition',
+                    cover: {
+                      url:
+                        '/uploads/soldier_of_fortune_ii_double_helix_gold_edition_6c3b8e6b4d.jpg'
+                    },
+                    developers: [{ name: 'Raven Software' }],
+                    price: 33.69,
+                    __typename: 'Game'
+                  }
+                ]
+              }
+            }
+          }
+        ]}
+        addTypename={false}
+      >
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
     )
 
-    expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+    expect(await screen.findByTestId('Mock ExploreSidebar')).toBeInTheDocument()
+    expect(
+      await screen.findByText(
+        /Soldier of Fortune II: Double Helix - Gold Edition/i
+      )
+    ).toBeInTheDocument()
 
     expect(
       screen.getByRole('button', { name: /show more/i })
