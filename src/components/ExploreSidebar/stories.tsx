@@ -27,7 +27,7 @@ export const WithInitialValues: Story<ExploreSidebarProps> = (args) => (
     {' '}
     <ExploreSidebar
       {...args}
-      initialValues={{ windows: true, sort_by: 'low-to-high' }}
+      initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
     />
   </div>
 )
