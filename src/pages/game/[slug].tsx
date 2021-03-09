@@ -2,9 +2,6 @@ import { useRouter } from 'next/router'
 import { initializeApollo } from 'utils/apollo'
 
 import Game, { GameTemplateProps } from 'templates/Game'
-
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
 import { QUERY_GAMES, QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
 import {
@@ -55,11 +52,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     QueryGameBySlugVariables
   >({
     query: QUERY_GAME_BY_SLUG,
-    variables: { slug: `${params?.slug}` }
+    variables: { slug: `${params?.slug}` },
+    fetchPolicy: 'no-cache' //garante que os dados dos jogos vão ser sempre novos, que venham do cache
   })
 
   if (!data.games.length) {
-    return { props: { notFound: true } }
+    return { notFound: true }
   }
 
   const game = data.games[0]
