@@ -53,9 +53,9 @@ export const cartMapper = (games: QueryGames_games[] | undefined) => {
   return games
     ? games.map((game) => ({
         id: game.id,
-        img: `http://localhost/1337${game.cover?.url}`,
-        price: formatPrice(game.price),
-        title: game.name
+        img: `http://localhost:1337${game.cover?.url}`,
+        title: game.name,
+        price: formatPrice(game.price)
       }))
     : []
 }

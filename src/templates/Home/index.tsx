@@ -9,17 +9,17 @@ import * as S from './styles'
 
 export type HomeTemplateProps = {
   banners: BannerProps[]
+  newGamesTitle: string
   newGames: GameCardProps[]
+  mostPopularGamesTitle: string
   mostPopularHighlight: HighlightProps
   mostPopularGames: GameCardProps[]
-  upcommingGames: GameCardProps[]
-  upcommingHighligth: HighlightProps
-  freeGames: GameCardProps[]
-  freeHighligth: HighlightProps
-  newGamesTitle: string
-  mostPopularGamesTitle: string
   upcomingGamesTitle: string
+  upcomingGames: GameCardProps[]
+  upcomingHighlight: HighlightProps
   freeGamesTitle: string
+  freeGames: GameCardProps[]
+  freeHighlight: HighlightProps
 }
 
 const Home = ({
@@ -28,9 +28,9 @@ const Home = ({
   mostPopularGames,
   mostPopularHighlight,
   freeGames,
-  freeHighligth,
-  upcommingGames,
-  upcommingHighligth,
+  freeHighlight,
+  upcomingGames,
+  upcomingHighlight,
   newGamesTitle,
   mostPopularGamesTitle,
   upcomingGamesTitle,
@@ -55,13 +55,13 @@ const Home = ({
 
     <ShowCase
       title={upcomingGamesTitle}
-      games={upcommingGames}
-      highlight={upcommingHighligth}
+      games={upcomingGames}
+      highlight={upcomingHighlight}
     />
 
     <ShowCase
       title={freeGamesTitle}
-      highlight={freeHighligth}
+      highlight={freeHighlight}
       games={freeGames}
     />
   </Base>

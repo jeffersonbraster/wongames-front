@@ -1,6 +1,5 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import bannerMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
@@ -10,20 +9,24 @@ import Home from '.'
 
 const props = {
   banners: bannerMock,
-  newGames: [gamesMock[0]],
+  newGamesTitle: 'News',
+  newGames: gamesMock,
+  mostPopularGamesTitle: 'Most Popular',
   mostPopularHighlight: highlightMock,
-  mostPopularGames: [gamesMock[0]],
-  upcommingGames: [gamesMock[0]],
-  upcommingHighligth: highlightMock,
-  freeGames: [gamesMock[0]],
-  freeHighligth: highlightMock
+  mostPopularGames: gamesMock,
+  upcomingGamesTitle: 'Upcoming',
+  upcomingGames: gamesMock,
+  upcomingHighlight: highlightMock,
+  freeGamesTitle: 'Free Games',
+  freeGames: gamesMock,
+  freeHighlight: highlightMock
 }
 
-jest.mock('components/ShowCase', () => {
+jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
     default: function Mock() {
-      return <div data-testid="Mock ShowCase"></div>
+      return <div data-testid="Mock Showcase"></div>
     }
   }
 })
@@ -32,16 +35,16 @@ jest.mock('components/BannerSlider', () => {
   return {
     __esModule: true,
     default: function Mock() {
-      return <div data-testid="Mock BannerSlider"></div>
+      return <div data-testid="Mock Banner Slider"></div>
     }
   }
 })
 
 describe('<Home />', () => {
-  it('should render banner and ShowCase', () => {
-    renderWithTheme(<Home {...props} />)
+  it('should render banner and showcases', () => {
+    render(<Home {...props} />)
 
-    expect(screen.getByTestId('Mock BannerSlider')).toBeInTheDocument()
-    expect(screen.getAllByTestId('Mock ShowCase')).toHaveLength(4)
+    expect(screen.getByTestId('Mock Banner Slider')).toBeInTheDocument()
+    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(4)
   })
 })
