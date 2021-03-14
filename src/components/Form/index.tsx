@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import * as TextFieldStyles from '../TextField/styles'
 import * as ButtonStyles from '../Button/styles'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
 
 export const FormWrapper = styled.div`
   ${({ theme }) => css`
@@ -14,6 +14,13 @@ export const FormWrapper = styled.div`
       margin: ${theme.spacings.medium} auto ${theme.spacings.xsmall};
     }
   `}
+`
+
+export const FormLoading = styled.img.attrs(() => ({
+  src: '/img/dots.svg',
+  alt: 'Waiting...'
+}))`
+  width: 4rem;
 `
 
 export const FormLink = styled.div`
