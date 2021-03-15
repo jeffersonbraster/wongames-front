@@ -7,6 +7,7 @@ import {
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import DropDown from 'components/DropDown'
 import * as S from './styles'
+import { signOut } from 'next-auth/client'
 
 export type UserDropDownProps = {
   username: string
@@ -37,12 +38,10 @@ const UserDropDown = ({ username }: UserDropDownProps) => (
         </S.Link>
       </Link>
 
-      <Link href="/logout" passHref>
-        <S.Link>
-          <ExitToApp />
-          <span>Sign out</span>
-        </S.Link>
-      </Link>
+      <S.Link role="button" onClick={() => signOut()} title="Sign out">
+        <ExitToApp />
+        <span>Sign out</span>
+      </S.Link>
     </S.Nav>
   </DropDown>
 )
