@@ -13,12 +13,12 @@ const fieldValidations = {
     .messages({ 'any.only': 'Suas senhas não conferem.' })
 }
 
-export type Fieldrrors = {
+export type FieldErrors = {
   [key: string]: string
 }
 
 function getFieldErrors(objError: Joi.ValidationResult) {
-  const errors: Fieldrrors = {}
+  const errors: FieldErrors = {}
 
   if (objError.error) {
     objError.error.details.forEach((err) => {
