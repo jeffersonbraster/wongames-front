@@ -2,6 +2,12 @@ import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 import Base from '.'
 
+jest.mock('next-auth/client', () => ({
+  useeSession: jest.fn(() => {
+    return [{ session: null }]
+  })
+}))
+
 jest.mock('components/Menu', () => {
   return {
     __esModule: true,
