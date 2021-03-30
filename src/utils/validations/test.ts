@@ -1,5 +1,9 @@
-import GameDetails from 'components/GameDetails'
-import { signInValidation, signUpValidation } from '.'
+import {
+  forgotValidate,
+  resetValidate,
+  signInValidation,
+  signUpValidation
+} from '.'
 
 describe('validations', () => {
   describe('signInValidade()', () => {
@@ -55,6 +59,39 @@ describe('validations', () => {
       }
 
       expect(signUpValidation(values).confirm_password).toMatchInlineSnapshot()
+    })
+  })
+
+  describe('forgotValidate()', () => {
+    it('should validade empty fields', () => {
+      const values = { email: '' }
+
+      expect(forgotValidate(values)).toMatchObject({
+        email: expect.any(String)
+      })
+    })
+
+    it('shoud return invalid email error', () => {
+      const values = { email: 'invalid-email' }
+      expect(forgotValidate(values).email).toMatchInlineSnapshot()
+    })
+  })
+
+  describe('resetValidate()', () => {
+    it('should validade empty fields', () => {
+      const values = { password: '', confirm_password: '' }
+
+      expect(resetValidate(values)).toMatchObject({
+        password: expect.any(String)
+      })
+    })
+
+    it('should validade confirm password', () => {
+      const values = { password: '1234', confirm_password: '1234' }
+
+      expect(resetValidate(values).confirm_password).toMatchInlineSnapshot(
+        `"\\"confirm_password\\" is not allowed to be empty"`
+      )
     })
   })
 })

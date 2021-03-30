@@ -43,3 +43,26 @@ export function signInValidation(values: SignInValues) {
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
+
+type ForgotValidateParams = Pick<UsersPermissionsRegisterInput, 'email'>
+
+export function forgotValidate(values: ForgotValidateParams) {
+  const { email } = fieldValidations
+
+  const schema = Joi.object({ email })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+type ResetValidadeParams = {
+  password: string
+  confirm_password: string
+}
+
+export function resetValidate(values: ResetValidadeParams) {
+  const { password, confirm_password } = fieldValidations
+
+  const schema = Joi.object({ password, confirm_password })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
