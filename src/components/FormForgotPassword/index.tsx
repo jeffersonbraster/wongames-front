@@ -12,7 +12,6 @@ import {
   FormSuccess
 } from 'components/Form'
 import Button from '../Button'
-import { useRouter } from 'next/router'
 import { FieldErrors, forgotValidate } from 'utils/validations'
 
 const FormForgotPassword = () => {
@@ -21,9 +20,6 @@ const FormForgotPassword = () => {
   const [fieldError, setFieldError] = useState<FieldErrors>({})
   const [values, setValues] = useState({ email: '' })
   const [loading, setLoading] = useState(false)
-
-  const routes = useRouter()
-  const { push, query } = routes
 
   const handleInput = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }))
