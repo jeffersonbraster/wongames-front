@@ -85,7 +85,7 @@ const FormForgotPassword = () => {
               error={fieldError?.email}
               initialValue={query.email as string}
               onInputChange={(v) => handleInput('email', v)}
-              type="email"
+              type="text"
               icon={<Email />}
             />
 
