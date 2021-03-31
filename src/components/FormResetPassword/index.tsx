@@ -73,7 +73,7 @@ const FormResetPassword = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           name="password"
-          placeholder="Senha"
+          placeholder="Password"
           onInputChange={(v) => handleInput('password', v)}
           error={fieldError?.password}
           type="password"
@@ -82,7 +82,7 @@ const FormResetPassword = () => {
 
         <TextField
           name="confirm_password"
-          placeholder="Confirme a senha"
+          placeholder="Confirm password"
           onInputChange={(v) => handleInput('confirm_password', v)}
           error={fieldError?.confirm_password}
           type="password"
