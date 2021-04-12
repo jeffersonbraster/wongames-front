@@ -1,3 +1,4 @@
+import 'session.mock'
 import { screen } from '@testing-library/react'
 import 'match-media-mock'
 import { renderWithTheme } from 'utils/tests/helpers'

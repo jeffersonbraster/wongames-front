@@ -35,6 +35,12 @@ exports[`<FormSignIn /> should render the form 1`] = `
   width: 100%;
 }
 
+.c5:-webkkit-autofill {
+  -wbkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+  -webkit-filter: none;
+  filter: none;
+}
+
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -76,6 +82,10 @@ exports[`<FormSignIn /> should render the form 1`] = `
   font-size: 1.6rem;
   padding: 0.8rem 4.8rem;
   width: 100%;
+}
+
+.c8:focus {
+  outline: 1px dashed;
 }
 
 .c8:hover {
@@ -208,15 +218,18 @@ exports[`<FormSignIn /> should render the form 1`] = `
         </div>
         <a
           class="c6"
-          href="#"
+          href="/forgot-password"
         >
           Forgot your password?
         </a>
         <button
           class="c7 c8"
+          type="submit"
         >
           <span>
-            Sign In
+            <span>
+              Sign In
+            </span>
           </span>
         </button>
         <div

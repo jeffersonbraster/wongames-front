@@ -1,3 +1,4 @@
+import 'session.mock'
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import GameCard from 'components/GameCard'

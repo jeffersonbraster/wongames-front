@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { WishlistContextDefaultValues } from 'hooks/use-wishlist'
-import { act, render, screen } from 'utils/test-utils'
+import { act, render, screen, waitFor } from 'utils/test-utils'
 import WishlistButton from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -80,8 +80,9 @@ describe('<wishlistButton />', () => {
     act(() => {
       userEvent.click(screen.getByText(/add to wishlist/i))
     })
-
-    expect(wishlistProviderProps.addToWishlist).toHaveBeenCalledWith('1')
+    waitFor(() => {
+      expect(wishlistProviderProps.addToWishlist).toHaveBeenCalledWith('1')
+    })
   })
 
   it('should remove from wishlist', () => {
@@ -97,6 +98,8 @@ describe('<wishlistButton />', () => {
       userEvent.click(screen.getByText(/remove to wishlist/i))
     })
 
-    expect(wishlistProviderProps.removeFromWishlist).toHaveBeenCalledWith('1')
+    waitFor(() => {
+      expect(wishlistProviderProps.removeFromWishlist).toHaveBeenCalledWith('1')
+    })
   })
 })

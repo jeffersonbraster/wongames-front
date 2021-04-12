@@ -18,7 +18,11 @@ describe('validations', () => {
 
     it('shoud return invalid email error', () => {
       const values = { email: 'invalid-email', password: '1234' }
-      expect(signInValidation(values)).toMatchInlineSnapshot()
+      expect(signInValidation(values)).toMatchInlineSnapshot(`
+        Object {
+          "email": "\\"email\\" must be a valid email",
+        }
+      `)
     })
   })
 
@@ -37,7 +41,9 @@ describe('validations', () => {
     it('should return short username error', () => {
       const values = { username: 'test', email: '', password: '' }
 
-      expect(signUpValidation(values).username).toMatchInlineSnapshot()
+      expect(signUpValidation(values).username).toMatchInlineSnapshot(
+        `"\\"username\\" length must be at least 5 characters long"`
+      )
     })
 
     it('should return invalid email error', () => {
@@ -47,7 +53,9 @@ describe('validations', () => {
         password: '123456'
       }
 
-      expect(signUpValidation(values).email).toMatchInlineSnapshot()
+      expect(signUpValidation(values).email).toMatchInlineSnapshot(
+        `"\\"email\\" must be a valid email"`
+      )
     })
 
     it('should return error if password does not match with confirm_password', () => {
@@ -58,7 +66,9 @@ describe('validations', () => {
         confirm_password: '12345'
       }
 
-      expect(signUpValidation(values).confirm_password).toMatchInlineSnapshot()
+      expect(signUpValidation(values).confirm_password).toMatchInlineSnapshot(
+        `"Suas senhas não conferem."`
+      )
     })
   })
 
@@ -73,7 +83,9 @@ describe('validations', () => {
 
     it('shoud return invalid email error', () => {
       const values = { email: 'invalid-email' }
-      expect(forgotValidate(values).email).toMatchInlineSnapshot()
+      expect(forgotValidate(values).email).toMatchInlineSnapshot(
+        `"\\"email\\" must be a valid email"`
+      )
     })
   })
 
@@ -90,7 +102,7 @@ describe('validations', () => {
       const values = { password: '1234', confirm_password: '1234' }
 
       expect(resetValidate(values).confirm_password).toMatchInlineSnapshot(
-        `"\\"confirm_password\\" is not allowed to be empty"`
+        `undefined`
       )
     })
   })
