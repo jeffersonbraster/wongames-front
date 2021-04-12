@@ -14,10 +14,10 @@ const WishlistButton = ({
   size = 'small'
 }: WishlistButtonProps) => {
   const [session] = useSession()
-  const { isInWishlist, addToWishlist, RemoveFromWishlist } = useWishlist()
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
 
   const handleClick = () => {
-    isInWishlist(id) ? RemoveFromWishlist(id) : addToWishlist(id)
+    isInWishlist(id) ? removeFromWishlist(id) : addToWishlist(id)
   }
 
   const ButtonText = isInWishlist(id)

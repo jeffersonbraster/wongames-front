@@ -7,21 +7,16 @@ import {
 } from 'graphql/mutations/wishlist'
 import { useQueryWishlist } from 'graphql/queries/wishlist'
 import { useSession } from 'next-auth/client'
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react'
+import { useMemo } from 'react'
+import { useState } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 import { gamesMapper } from 'utils/mappers'
-import { wishlistItems } from './mock'
 
 export type WishlistContextData = {
   items: GameCardProps[]
   isInWishlist: (id: string) => boolean
   addToWishlist: (id: string) => void
-  RemoveFromWishlist: (id: string) => void
+  removeFromWishlist: (id: string) => void
   loading: boolean
 }
 
@@ -29,7 +24,7 @@ export const WishlistContextDefaultValues = {
   items: [],
   isInWishlist: () => false,
   addToWishlist: () => null,
-  RemoveFromWishlist: () => null,
+  removeFromWishlist: () => null,
   loading: false
 }
 
@@ -37,15 +32,14 @@ export const WishlistContext = createContext<WishlistContextData>(
   WishlistContextDefaultValues
 )
 
-export type WishlistProvviderProps = {
+export type WishlistProviderProps = {
   children: React.ReactNode
 }
 
-const WishlistProvider = ({ children }: WishlistProvviderProps) => {
+const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [session] = useSession()
-
   const [wishlistId, setWishlistId] = useState<string | null>()
-  const [wishlistsData, setWishlistData] = useState<
+  const [wishlistItems, setWishlistItems] = useState<
     QueryWishlist_wishlists_games[]
   >([])
 
@@ -54,8 +48,8 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     {
       context: { session },
       onCompleted: (data) => {
-        setWishlistData(data?.createWishlist?.wishlist?.games || []),
-          setWishlistId(data?.createWishList?.wishlist?.id)
+        setWishlistItems(data?.createWishlist?.wishlist?.games || [])
+        setWishlistId(data?.createWishlist?.wishlist?.id)
       }
     }
   )
@@ -65,8 +59,7 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     {
       context: { session },
       onCompleted: (data) => {
-        setWishlistData(data?.updateWishlist?.wishlist?.games || []),
-          setWishlistId(data?.createWishlist?.wishlist?.id)
+        setWishlistItems(data?.updateWishlist?.wishlist?.games || [])
       }
     }
   )
@@ -80,11 +73,10 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
   })
 
   useEffect(() => {
-    setWishlistData(data?.wishlists[0]?.games || [])
+    setWishlistItems(data?.wishlists[0]?.games || [])
     setWishlistId(data?.wishlists[0]?.id)
   }, [data])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const wishlistIds = useMemo(() => wishlistItems.map((game) => game.id), [
     wishlistItems
   ])
@@ -93,13 +85,14 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     !!wishlistItems.find((game) => game.id === id)
 
   const addToWishlist = (id: string) => {
-    //se não existir wishlist - cria
+    // se não existir wishlist - cria
     if (!wishlistId) {
       return createList({
         variables: { input: { data: { games: [...wishlistIds, id] } } }
       })
     }
-    //senão atualiza a wishlist existente
+
+    // // senão atualiza a wishlist existente
     return updateList({
       variables: {
         input: {
@@ -110,7 +103,7 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     })
   }
 
-  const RemoveFromWishlist = (id: string) => {
+  const removeFromWishlist = (id: string) => {
     updateList({
       variables: {
         input: {
@@ -124,11 +117,11 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
   return (
     <WishlistContext.Provider
       value={{
-        items: gamesMapper(wishlistsData),
-        loading: loadingQuery || loadingCreate || loadingUpdate,
+        items: gamesMapper(wishlistItems),
         isInWishlist,
         addToWishlist,
-        RemoveFromWishlist
+        removeFromWishlist,
+        loading: loadingQuery || loadingCreate || loadingUpdate
       }}
     >
       {children}

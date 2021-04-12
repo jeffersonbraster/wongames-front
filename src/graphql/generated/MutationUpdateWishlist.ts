@@ -45,5 +45,5 @@ export interface MutationUpdateWishlist {
 }
 
 export interface MutationUpdateWishlistVariables {
-  input: updateWishlistInput;
+  input?: updateWishlistInput | null;
 }
