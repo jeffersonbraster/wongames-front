@@ -71,7 +71,7 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     }
   )
 
-  const { data, loading } = useQueryWishlist({
+  const { data, loading: loadingQuery } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
     variables: {
@@ -110,13 +110,22 @@ const WishlistProvider = ({ children }: WishlistProvviderProps) => {
     })
   }
 
-  const RemoveFromWishlist = (id: string) => {}
+  const RemoveFromWishlist = (id: string) => {
+    updateList({
+      variables: {
+        input: {
+          where: { id: wishlistId },
+          data: { games: wishlistIds.filter((gameId: string) => gameId !== id) }
+        }
+      }
+    })
+  }
 
   return (
     <WishlistContext.Provider
       value={{
         items: gamesMapper(wishlistsData),
-        loading,
+        loading: loadingQuery || loadingCreate || loadingUpdate,
         isInWishlist,
         addToWishlist,
         RemoveFromWishlist
