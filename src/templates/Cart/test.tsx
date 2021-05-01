@@ -4,12 +4,10 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
-import cardsMock from 'components/PaymentOptions/mock'
 
 import Cart from '.'
 
 const props = {
-  cards: cardsMock,
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock,
   recommendedTitle: 'teste'
@@ -58,7 +56,7 @@ describe('<Cart />', () => {
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
     expect(screen.getByTestId('Mock Cart')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
+    expect(screen.getByTestId('Mock PaymentForm')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
   })

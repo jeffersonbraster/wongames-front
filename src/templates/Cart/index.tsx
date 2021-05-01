@@ -4,7 +4,7 @@ import { Divider } from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
 import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
+import PaymentForm from 'components/PaymentForm'
 import ShowCase from 'components/ShowCase'
 import Base from 'templates/Base'
 import { ErrorWarning } from '@styled-icons/remix-line/ErrorWarning'
@@ -14,17 +14,13 @@ export type CartProps = {
   recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
-} & CartListProps &
-  Pick<PaymentOptionsProps, 'cards'>
+} & CartListProps
 
 const Cart = ({
   recommendedTitle,
   recommendedGames,
-  recommendedHighlight,
-  cards
+  recommendedHighlight
 }: CartProps) => {
-  const handlePayment = () => ({})
-
   return (
     <Base>
       <Container>
@@ -35,7 +31,7 @@ const Cart = ({
         <S.Content>
           <CartList />
 
-          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+          <PaymentForm />
         </S.Content>
 
         <S.Obs>
