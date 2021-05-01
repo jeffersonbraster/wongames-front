@@ -2,6 +2,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 import CartList, { CartListProps } from 'components/CartList'
+import { Session } from 'next-auth/client'
 import { Container } from 'components/Container'
 import { Divider } from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
@@ -14,12 +15,14 @@ import { ErrorWarning } from '@styled-icons/remix-line/ErrorWarning'
 import * as S from './styles'
 
 export type CartProps = {
+  session: Session
   recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 } & CartListProps
 
 const Cart = ({
+  session,
   recommendedTitle,
   recommendedGames,
   recommendedHighlight
@@ -37,7 +40,7 @@ const Cart = ({
           <CartList />
 
           <Elements stripe={stripe}>
-            <PaymentForm />
+            <PaymentForm session={session} />
           </Elements>
         </S.Content>
 
