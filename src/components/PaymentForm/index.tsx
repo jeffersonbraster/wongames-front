@@ -9,12 +9,14 @@ import { useCart } from 'hooks/use-cart'
 import { createPaymentIntent } from 'utils/stripe/methods'
 import { Session } from 'next-auth/client'
 import { FormLoading } from 'components/Form'
+import { useRouter } from 'next/router'
 
 type PaymentFormProps = {
   session: Session
 }
 
 const PaymentForm = ({ session }: PaymentFormProps) => {
+  const { push } = useRouter()
   const { items } = useCart()
   const stripe = useStripe()
   const elements = useElements()
@@ -64,7 +66,12 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     event.preventDefault()
     setLoading(true)
 
-    //se for freegames salva no banco e redirect pag success
+    //se for freegames salva no banco e
+    if (freeGames) {
+      //redirect pag success
+      push('/success')
+      return
+    }
 
     const payload = await stripe!.confirmCardPayment(clientSecret, {
       payment_method: {
@@ -83,6 +90,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
 
       //salvar a compra no banco do strapi
       //redirecionar paga pagina de sucesso
+      push('/success')
     }
   }
 

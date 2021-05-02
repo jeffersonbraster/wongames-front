@@ -9,9 +9,11 @@ import Showcase from 'components/ShowCase'
 import { HighlightProps } from 'components/Highlight'
 
 import * as S from './styles'
+import { useCart } from 'hooks/use-cart'
+import { useEffect } from 'react'
 
 export type SuccessTemplateProps = {
-  recommendedTitle: string
+  recommendedTitle?: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 }
@@ -21,6 +23,12 @@ const Success = ({
   recommendedGames,
   recommendedHighlight
 }: SuccessTemplateProps) => {
+  const { clearCart } = useCart()
+
+  useEffect(() => {
+    clearCart()
+    return
+  }, [])
   return (
     <Base>
       <Container>
@@ -43,9 +51,9 @@ const Success = ({
       </Container>
 
       <Showcase
-        title={recommendedTitle}
-        games={recommendedGames}
-        highlight={recommendedHighlight}
+        title={recommendedTitle || 'You may like these games'}
+        games={recommendedGames || ''}
+        highlight={recommendedHighlight || ''}
       />
     </Base>
   )

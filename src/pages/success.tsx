@@ -16,7 +16,7 @@ export async function getStaticProps() {
   })
 
   return {
-    revalidade: 60 * 60,
+    revalidate: 60 * 60,
     props: {
       recommendedTitle: data.recommended?.section?.title,
       recommendedGames: gamesMapper(data.recommended?.section?.games),

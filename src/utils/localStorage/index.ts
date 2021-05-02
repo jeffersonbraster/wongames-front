@@ -4,7 +4,7 @@ export function getStorageItem(key: string) {
   // no next via server/static não tem window, precisa verificar para nao quebrar.
   if (typeof window === 'undefined') return
 
-  const data = window.localStorage.getItem(`${APP_KEY}_ ${key}`)
+  const data = window.localStorage.getItem(`${APP_KEY}_${key}`)
 
   return JSON.parse(data!)
 }
