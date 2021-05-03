@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Heading from 'components/Heading'
@@ -10,6 +10,7 @@ import { createPaymentIntent } from 'utils/stripe/methods'
 import { Session } from 'next-auth/client'
 import { FormLoading } from 'components/Form'
 import { useRouter } from 'next/router'
+import { createPayment } from 'utils/stripe/methods'
 
 type PaymentFormProps = {
   session: Session
@@ -62,12 +63,24 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     setError(event.error ? event.error.message : '')
   }
 
+  const saveOrder = async (paymentIntent?: PaymentIntent) => {
+    const data = await createPayment({
+      items,
+      paymentIntent,
+      token: session.jwt
+    })
+
+    return data
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setLoading(true)
 
     //se for freegames salva no banco e
     if (freeGames) {
+      //salvar a compra no banco
+      saveOrder()
       //redirect pag success
       push('/success')
       return
@@ -86,9 +99,8 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       setError(null)
       setLoading(false)
 
-      console.log('compra feita')
-
-      //salvar a compra no banco do strapi
+      //salvar a compra no banco
+      saveOrder(payload.paymentIntent)
       //redirecionar paga pagina de sucesso
       push('/success')
     }
