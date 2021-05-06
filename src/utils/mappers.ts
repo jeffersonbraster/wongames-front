@@ -5,6 +5,7 @@ import {
 } from 'graphql/generated/QueryHome'
 import { QueryWishlist_wishlists_games } from 'graphql/generated/QueryWishlist'
 import formatPrice from './format-price'
+import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
 
 export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map((banner) => ({
@@ -60,5 +61,34 @@ export const cartMapper = (games: QueryGames_games[] | undefined) => {
         title: game.name,
         price: formatPrice(game.price)
       }))
+    : []
+}
+
+export const ordersMapper = (orders: QueryOrders_orders[]) => {
+  return orders
+    ? orders.map((order) => {
+        return {
+          id: order.id,
+          paymentInfo: {
+            flag: order.card_brand,
+            img: order.card_brand ? `/img/cards/${order.card_brand}.png` : null,
+            number: order.card_last4
+              ? `**** **** **** ${order.card_last4}`
+              : 'Free Games',
+            purchaseDate: `Purchase made on ${new Intl.DateTimeFormat('en-US', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric'
+            }).format(new Date(order.created_at))}`
+          },
+          games: order.games.map((game) => ({
+            id: game.id,
+            title: game.name,
+            downloadLink: `http://localhost:3000`,
+            img: `http://localhost:1337/${game.cover?.url}`,
+            price: formatPrice(game.price)
+          }))
+        }
+      })
     : []
 }
