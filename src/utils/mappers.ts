@@ -85,7 +85,7 @@ export const ordersMapper = (orders: QueryOrders_orders[]) => {
             id: game.id,
             title: game.name,
             downloadLink: `http://localhost:3000`,
-            img: `http://localhost:1337/${game.cover?.url}`,
+            img: `http://localhost:1337${game.cover?.url}`,
             price: formatPrice(game.price)
           }))
         }
