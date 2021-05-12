@@ -8,42 +8,53 @@ import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import DropDown from 'components/DropDown'
 import * as S from './styles'
 import { signOut } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 export type UserDropDownProps = {
   username: string
 }
 
-const UserDropDown = ({ username }: UserDropDownProps) => (
-  <DropDown
-    title={
-      <>
-        <AccountCircle size={24} />
-        <S.Username>{username}</S.Username>
-        <ChevronDown size={24} />
-      </>
-    }
-  >
-    <S.Nav>
-      <Link href="/profile/me" passHref>
-        <S.Link>
-          <AccountCircle />
-          <span>My profile</span>
-        </S.Link>
-      </Link>
+const UserDropDown = ({ username }: UserDropDownProps) => {
+  const { push } = useRouter()
+  return (
+    <DropDown
+      title={
+        <>
+          <AccountCircle size={24} />
+          <S.Username>{username}</S.Username>
+          <ChevronDown size={24} />
+        </>
+      }
+    >
+      <S.Nav>
+        <Link href="/profile/me" passHref>
+          <S.Link>
+            <AccountCircle />
+            <span>My profile</span>
+          </S.Link>
+        </Link>
 
-      <Link href="/wishlist" passHref>
-        <S.Link>
-          <FavoriteBorder />
-          <span>Whishlist</span>
-        </S.Link>
-      </Link>
+        <Link href="/wishlist" passHref>
+          <S.Link>
+            <FavoriteBorder />
+            <span>Whishlist</span>
+          </S.Link>
+        </Link>
 
-      <S.Link role="button" onClick={() => signOut()} title="Sign out">
-        <ExitToApp />
-        <span>Sign out</span>
-      </S.Link>
-    </S.Nav>
-  </DropDown>
-)
+        <S.Link
+          role="button"
+          onClick={async () => {
+            const data = await signOut({ redirect: false, callbackUrl: '/' })
+            push(data.url)
+          }}
+          title="Sign out"
+        >
+          <ExitToApp />
+          <span>Sign out</span>
+        </S.Link>
+      </S.Nav>
+    </DropDown>
+  )
+}
 
 export default UserDropDown

@@ -1,5 +1,4 @@
-import { TempHotDimensions } from '@styled-icons/remix-line/TempHot'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import theme from 'styles/theme'
 import { renderWithTheme } from 'utils/tests/helpers'
 import ProfileMenu from '.'
