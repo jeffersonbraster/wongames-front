@@ -9,6 +9,11 @@ module.exports = withPWA({
     disable: !isProd
   },
   images: {
-    domains: ['localhost', 'res.cloudinary.com']
+    domains: [
+      'localhost',
+      'res.cloudinary.com',
+      'avatars0.githubusercontent.com',
+      'github.com'
+    ]
   }
 })
