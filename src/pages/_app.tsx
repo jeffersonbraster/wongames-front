@@ -1,4 +1,6 @@
 import NextNprogrss from 'nextjs-progressbar'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../../next-seo.config'
 import { Provider as AuthProvider } from 'next-auth/client'
 import { ApolloProvider } from '@apollo/client'
 import { CartProvider } from 'hooks/use-cart'
@@ -30,6 +32,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="The best Games Stores in the word"
                 />
               </Head>
+              <DefaultSeo {...SEO} />
               <GlobalStyles />
               <NextNprogrss
                 color="#f231a5"

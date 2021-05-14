@@ -15,5 +15,8 @@ module.exports = withPWA({
       'avatars0.githubusercontent.com',
       'github.com'
     ]
+  },
+  future: {
+    webpack5: true
   }
 })
